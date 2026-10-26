@@ -1,0 +1,173 @@
+- id: sde2
+  title: Software Development Engineer II
+  company: Amazon
+  location: Seattle, WA
+  start: "2026-04"
+  end: null
+  summary: >
+    Works across customer-facing experiences and engineering foundations, from
+    reusable lazy-loaded components to AI-agent orchestration, retrieval tooling,
+    and operational systems.
+  storyTitle: Build leverage for the team.
+  storySummary: Software Development Engineer II at Amazon, April 2026 to present.
+  careerPoints:
+    - Led design and initial implementation of a multi-agent AI engineering platform, researching orchestrator-worker and swarm patterns and developing agent skills, workflow procedures, validation hooks, MCP integrations, and guardrails for more reliable AI-assisted engineering.
+    - Led the design of an orchestrator that routes requests to specialist AI agents, supported by a routing benchmark, memory agents, and writing skills.
+    - Co-built a polling service for an AI defect-finding agent, adding health metrics, staged AWS CDK rollout infrastructure, and an operations dashboard.
+    - Built shared TypeScript carousel components that split eager and deferred data fetching to support lazy loading.
+    - Unblocked legacy build and deployment pipelines by fixing dependency-merge failures, upgrading end-of-life dependencies, and removing retired jobs.
+    - Improved Java backend service startup reliability by parallelizing warmup tasks with bounded concurrency and adding fail-open timeouts and performance metrics; reduced average warmup time by approximately 50% in pre-production validation.
+    - Improved a wiki-to-Amazon Kendra indexing pipeline for retrieval-augmented generation (RAG) and built the initial TypeScript transformation functions, using section-level chunking, deep links, and 32 unit tests to improve knowledge retrieval for AI tools.
+    - Built observability and failure detection for a generative AI agent that identifies shopping-site defects, adding categorized failure metrics, dashboards, and alarms across workflow execution, AWS Lambda, and Amazon Bedrock.
+    - Developed reusable AWS CDK and TypeScript observability infrastructure, standardizing dashboards and alarm configurations to improve consistency and operational visibility across services.
+  highlights:
+    - projectId: ai-orchestrator
+  skills:
+    - Python
+    - TypeScript
+    - AWS CDK
+    - MCP
+    - Node.js
+    - Amazon CloudWatch
+    - Amazon Kendra
+  milestone: "Promotion to SDE II"
+  publish: true
+
+
+- id: sde1
+  title: Software Development Engineer
+  company: Amazon
+  location: Seattle, WA
+  start: "2023-08"
+  end: "2026-03"
+  summary: >
+    Delivered a launched mobile recommendation card and add-to-cart experiences,
+    improved accessibility and operational quality, and built early AI-assisted
+    engineering tools.
+  storyTitle: Bring the experience to life.
+  storySummary: Software Development Engineer at Amazon, August 2023 to March 2026.
+  careerPoints:
+    - Co-built a launched mobile recommendation card with badge, delivery-message, and add-to-cart features, adding metrics logging and end-to-end tests.
+    - Fixed screen-reader, keyboard-focus, and 200% text-zoom issues, then rolled out the zoom fix in stages.
+    - Built an add-to-cart quantity stepper in JavaScript and SCSS, integrating three cart applications and adding tests.
+    - Built a Slack bot to route code-review requests to subject-matter experts using agent workflows, guardrails, and knowledge lookups.
+    - Led the design and implementation of a reusable mobile free-shipping progress widget, integrating a shared card-rendering library, sticky-header behavior, live cart updates, accessibility support, metrics, and alarms; the widget launched as the default experience.
+    - Built and maintained customer-facing shopping and recommendation features using TypeScript, JavaScript, and Java, including recommendation-card layouts, delivery-message logic, experiment configuration, and feature-gated releases.
+    - Developed internal web applications and supporting infrastructure, migrating marketplace configuration to a centralized service, upgrading a deprecated Node.js runtime, improving bulk-upload validation, and modernizing AWS CDK build and infrastructure tooling.
+    - Co-built a generative AI agent for shopping-site defect detection, implementing AWS Lambda analysis functions, AWS CDK infrastructure, a cached Amazon Bedrock prompt layer, screenshot preprocessing, and AWS X-Ray monitoring and dashboards.
+    - Improved service monitoring and deployment reliability by adding severity-based CloudWatch alarms, consolidating duplicate alerts, and supporting a proxy migration across three packages.
+    - Strengthened operational execution and release readiness, participating in staged rollouts and change-management processes for customer-facing features and documenting launch procedures, acceptance tests, and operational guidance.
+    - Created and maintained engineering documentation, including 30+ team wiki pages, 20+ test and launch-readiness documents, design documents, runbooks, investigation reports, and on-call reports.
+    - Reviewed 450+ code changes between August 2024 and March 2026, contributing to code quality and engineering consistency across the team.
+  highlights:
+    - projectId: mobile-shopping-cards
+  skills:
+    - JavaScript
+    - TypeScript
+    - React
+    - AWS
+    - Amazon Bedrock
+    - ARIA
+    - SCSS
+  publish: true
+
+
+- id: uw-ta
+  title: Undergraduate Teaching Assistant (INFO 200 & INFO 498)
+  company: University of Washington Information School
+  location: Seattle, WA
+  start: "2021-09"
+  end: "2023-06"
+  summary: >
+    Taught weekly sections and mentored 100+ Informatics students while helping
+    develop a new version of the introductory Informatics course, and adapted
+    Microsoft's Judgment Call card game into an online teaching website for an
+    AI and ethics course.
+  storyTitle: Teach how people use information.
+  storySummary: Undergraduate Teaching Assistant at the University of Washington Information School, September 2021 to June 2023.
+  careerPoints:
+    - Collaborated with the professor and TA team to develop and teach a new version of the introductory Informatics course, helping students understand how people create, categorize, find, interpret, manipulate, and use information across INFO 200 quarters (Autumn 2021, Winter and Autumn 2022, Winter and Spring 2023).
+    - Taught weekly sections and mentored 1:1 with 100+ students pursuing Informatics through the process of analyzing and designing empathetic IT solutions for information problems.
+    - Adapted Microsoft's Application Architecture Fundamentals card game, Judgment Call, into an online website for INFO 498.
+    - Guided 33 students through the course "AI, Robots, and Transcending Religion" in INFO 498 (Spring 2021).
+  highlights: []
+  skills:
+    - React.js
+    - Heroku
+    - Teaching
+    - Curriculum Design
+  publish: true
+
+
+- id: intern
+  title: Software Development Engineer Intern
+  company: Amazon
+  location: Seattle, WA
+  start: "2022-06"
+  end: "2022-09"
+  summary: >
+    Built a product-attribute data-quality pipeline end to end, from AWS
+    infrastructure and scheduled workflows to PySpark scoring against a reference
+    dataset, then presented the work at the summer showcase.
+  storyTitle: Make data more trustworthy.
+  storySummary: Software Development Engineer Intern at Amazon, June to September 2022.
+  careerPoints:
+    - Built AWS Glue and AWS CDK infrastructure for crawlers, jobs, scheduled workflows, permissions, and storage.
+    - Wrote PySpark jobs to score the completeness and correctness of product attributes against a reference dataset.
+    - Designed and documented the project across three design-document versions, then presented it at the summer 2022 intern presentation.
+  highlights:
+    - projectId: product-attribute-pipeline
+  skills:
+    - PySpark
+    - AWS Glue
+    - AWS CDK
+    - AWS IAM
+    - Amazon S3
+  publish: true
+
+
+- id: microgroove
+  title: Developer Consultant
+  company: Microgroove
+  location: Bellevue, WA
+  start: "2019-06"
+  end: "2019-07"
+  summary: >
+    Analyzed a legacy website's data flows and researched CMS options to help a
+    small development team choose a lighter, more future-proof web solution.
+  storyTitle: Find the real problem first.
+  storySummary: Developer Consultant at Microgroove, June to July 2019.
+  careerPoints:
+    - Identified flaws in the legacy website, analyzed the flow of data through site interactions, and collaborated with the 3-person development team to design a lighter, more future-proof web solution.
+    - Conducted research analysis on content management system solutions to draft 4 proposals best aligned to handle customer content data, and presented the results to the development team, where the option handling data most flexibly was chosen.
+  highlights: []
+  skills:
+    - CMS Research
+    - Web Architecture
+    - Requirements Analysis
+  publish: true
+
+
+- id: symphoni
+  title: Software Engineer Intern
+  company: Symphoni.cc
+  location: Greater Seattle Area
+  start: "2018-06"
+  end: "2018-09"
+  summary: >
+    Built full-stack features for an Angular platform that lowers the barrier
+    and cost of starting and running a small business, shipping a user-activity
+    tracking feature to production.
+  storyTitle: Ship a feature end to end.
+  storySummary: Software Engineer Intern at Symphoni.cc, June to September 2018.
+  careerPoints:
+    - Collaborated with an 8-person development team to build an Angular platform with Node.js and MongoDB that aims to lower the barrier and cost of starting and running a small business.
+    - Worked iteratively with mentors and the team to identify and resolve 10+ bugs within the system.
+    - Responsible for full-stack designing, building, and testing a feature that tracks the duration of user activity on certain pages, which was pushed to production.
+  highlights: []
+  skills:
+    - Angular
+    - Node.js
+    - MongoDB
+    - Full-Stack Development
+  publish: true

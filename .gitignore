@@ -26,5 +26,7 @@ pnpm-debug.log*
 # temporary files
 /tmp
 
-# Playwright test files
-playwright-tests/
+# Playwright output
+playwright-tests/*
+playwright-report/*
+test-results/*

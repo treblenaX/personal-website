@@ -1,0 +1,43 @@
+---
+interface Props {
+  project: {
+    data: {
+      title: string;
+      period: string;
+      problem: string;
+      contribution: string[];
+      outcome?: string;
+      technologies?: string[];
+    };
+  };
+}
+
+const { project } = Astro.props as Props;
+const { data } = project;
+const { title, period, problem, contribution, outcome, technologies } = data;
+---
+
+<details class="project-highlight">
+  <summary>
+    <span>{title}</span>
+    <span class="project-highlight__period">{period}</span>
+  </summary>
+  <div class="project-highlight__details">
+    <p><strong>Problem:</strong> {problem}</p>
+    <p><strong>Contribution:</strong></p>
+    <ul>{contribution.map((item) => <li>{item}</li>)}</ul>
+    {outcome && <p><strong>Outcome:</strong> {outcome}</p>}
+    {technologies && technologies.length > 0 && <p><strong>Technologies:</strong> {technologies.join(', ')}</p>}
+  </div>
+</details>
+
+<style>
+  .project-highlight { border-top: 1px solid var(--border); }
+  .project-highlight:last-child { border-bottom: 1px solid var(--border); }
+  .project-highlight summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; padding: .8rem 0; cursor: pointer; font-weight: 600; }
+  .project-highlight summary:focus-visible { outline: 2px solid var(--outline); outline-offset: 3px; }
+  .project-highlight__period { color: var(--muted-foreground); font-size: .9rem; font-weight: 400; }
+  .project-highlight__details { max-width: 44rem; padding: 0 0 1rem; color: var(--muted-foreground); line-height: 1.6; }
+  .project-highlight__details p { margin: .5rem 0; }
+  .project-highlight__details ul { margin: .25rem 0 .75rem; padding-left: 1.25rem; }
+</style>

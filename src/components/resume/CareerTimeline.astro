@@ -1,0 +1,65 @@
+---
+import TimelineEntry from './TimelineEntry.astro';
+import SkillGroups from './SkillGroups.astro';
+import { getCollection } from 'astro:content';
+
+const roles = await getCollection('roles');
+const projects = await getCollection('projects');
+const { showIntro = true } = Astro.props;
+
+// Only reviewed records are rendered publicly.
+const publishedRoles = roles
+  .filter(role => role.data.publish)
+  .sort((a, b) => b.data.start.localeCompare(a.data.start));
+
+const publishedProjects = new Map();
+projects.forEach(project => {
+  if (!project.data.publish) return;
+  publishedProjects.set(project.data.id, project);
+});
+
+const skillRoles = publishedRoles.filter(role => role.data.skills?.length);
+---
+
+<main id="career" class="career max-w-4xl mx-auto px-5 py-8 md:px-8">
+  {showIntro && <header class="career__intro">
+    <p class="career__eyebrow">Experience</p>
+    <h1>Career timeline</h1>
+    <p class="career__lede">A record of roles, growing scope, and selected engineering work.</p>
+  </header>}
+
+  <section id="experience" aria-labelledby="experience-heading" class="career__section">
+    <h2 id="experience-heading">Experience</h2>
+    {publishedRoles.length ? (
+      <div class="career__timeline">
+        {publishedRoles.map((role) => {
+          const projectsForRole = (role.data.highlights ?? [])
+            .map(({ projectId }) => publishedProjects.get(projectId))
+            .filter(Boolean);
+          return <TimelineEntry role={role} projects={projectsForRole} />;
+        })}
+      </div>
+    ) : (
+      <p class="career__empty">Experience details are being reviewed before publication.</p>
+    )}
+  </section>
+
+  {skillRoles.length > 0 && (
+    <section aria-labelledby="skills-heading" class="career__section">
+      <h2 id="skills-heading">Technical skills</h2>
+      <SkillGroups roles={skillRoles} />
+    </section>
+  )}
+
+  <style>
+    .career { --career-rule: color-mix(in srgb, var(--primary) 36%, var(--border)); }
+    .career__intro { max-width: 46rem; padding: 2rem 0 4.5rem; }
+    .career__eyebrow { margin: 0 0 .75rem; color: var(--primary); font-size: .9rem; font-weight: 650; }
+    .career h1 { max-width: 12ch; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.7rem, 8vw, 5rem); font-weight: 500; line-height: 1.02; }
+    .career__lede { max-width: 38rem; margin: 1.25rem 0 0; color: var(--muted-foreground); font-size: 1.15rem; line-height: 1.65; }
+    .career__section { margin-top: 2.75rem; }
+    .career__section h2 { margin: 0 0 1.5rem; font-size: 1.45rem; }
+    .career__timeline { border-left: 1px solid var(--career-rule); }
+    .career__empty { max-width: 38rem; margin: 0; padding: 1.25rem 0; border-top: 1px solid var(--career-rule); color: var(--muted-foreground); }
+  </style>
+</main>

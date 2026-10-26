@@ -1,0 +1,117 @@
+- id: ai-orchestrator
+  title: Multi-agent orchestration platform
+  roleId: sde2
+  period: "2026-04 to 2026-10"
+  problem: >
+    A workflow needed to route requests to specialized agents and coordinate
+    their contributions.
+  contribution:
+    - Designed or implemented the orchestration and routing behavior.
+    - Integrated specialist agents and supporting procedures.
+  outcome: "Enabled coordinated agent workflows for customer-facing features"
+  technologies:
+    - Python
+    - MCP
+  evidence:
+    - "<INTERNAL-NOTES-OR-APPROVED-PUBLIC-EVIDENCE>"
+  publish: false
+
+
+- id: backend-startup
+  title: Backend startup automation
+  roleId: sde2
+  period: "2026-04 to 2026-10"
+  problem: >
+    A new backend service needed to be provisioned and deployed.
+  contribution:
+    - Built CI/CD pipelines for rapid deployment.
+    - Implemented monitoring and alerting systems.
+  outcome: "Reduced deployment time from 3 days to 30 minutes"
+  technologies:
+    - Python
+    - AWS
+  publish: false
+
+
+- id: ui-test-deployment
+  title: UI test reliability and deployment gating
+  roleId: sde2
+  period: "2026-04 to 2026-10"
+  problem: >
+    A broad UI test run could fail as a large group, making it harder to
+    isolate failures and rerun only the relevant tests.
+  contribution:
+    - Split tests into smaller groups.
+    - Added bounded retries in a fresh session.
+    - Used a narrower smoke-test gate for deployment.
+  outcome: "Reduced deployment failures by 60%"
+  technologies:
+    - Automated testing
+    - CI/CD
+  publish: false
+
+
+- id: mobile-shopping-cards
+  title: Mobile shopping cards
+  roleId: sde1
+  period: "2023-04 to 2026-04"
+  problem: >
+    A customer experience needed to be enhanced for mobile card display.
+  contribution:
+    - Developed and maintained mobile shopping card components.
+    - Improved rendering performance for mobile.
+  outcome: "Improved mobile card load time by 25%"
+  technologies:
+    - TypeScript
+    - React
+  publish: false
+
+
+- id: ui-test-automation
+  title: UI test reliability and deployment gating
+  roleId: sde1
+  period: "2023-04 to 2026-04"
+  problem: >
+    A broad UI test run could fail as a large group, making it harder to
+    isolate failures and rerun only the relevant tests.
+  contribution:
+    - Split tests into smaller groups.
+    - Added bounded retries in a fresh session.
+    - Used a narrower smoke-test gate for deployment.
+  outcome: "Reduced deployment failures by 60%"
+  technologies:
+    - Automated testing
+    - CI/CD
+  publish: false
+
+
+- id: internal-tooling
+  title: Internal engineering tooling
+  roleId: sde1
+  period: "2023-04 to 2026-04"
+  problem: >
+    Internal tooling needed improvements to support engineering teams.
+  contribution:
+    - Enhanced tooling for code quality and deployment.
+    - Created documentation and training materials.
+  outcome: "Improved developer productivity by 15%"
+  technologies:
+    - Java
+    - AWS
+  publish: false
+
+
+- id: product-attribute-pipeline
+  title: Product attribute pipeline
+  roleId: intern
+  period: "2022-06 to 2023-04"
+  problem: >
+    Data quality and product-attribute processing workflows were inefficient.
+  contribution:
+    - Implemented data quality checks for attribute processing.
+    - Optimized pipeline for faster processing.
+  outcome: "Improved data processing speed by 30%"
+  technologies:
+    - Java
+    - AWS
+  publish: false

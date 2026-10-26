@@ -1,0 +1,36 @@
+---
+interface Props {
+  roles: Array<{ data: { skills: string[] } }>;
+}
+
+const { roles } = Astro.props as Props;
+const groups = [
+  { name: 'Programming', skills: ['Python', 'Java', 'TypeScript', 'JavaScript', 'Node.js', 'React', 'Angular'] },
+  { name: 'Cloud and infrastructure', skills: ['AWS', 'Docker', 'Kubernetes'] },
+  { name: 'Testing and reliability', skills: ['Automated testing', 'CI/CD'] },
+];
+const allSkills = [...new Set<string>(roles.flatMap(role => role.data.skills ?? []))];
+const groupedSkills: { name: string; values: string[] }[] = groups.map(group => ({
+  ...group,
+  values: allSkills.filter(skill => group.skills.includes(skill)),
+})).filter(group => group.values.length).map(({ name, values }) => ({ name, values }));
+const otherSkills = allSkills.filter(skill => !groups.some(group => group.skills.includes(skill)));
+if (otherSkills.length) groupedSkills.push({ name: 'Other', values: otherSkills });
+---
+
+<div class="skill-groups">
+  {groupedSkills.map(group => (
+    <section class="skill-group" aria-label={group.name}>
+      <h3>{group.name}</h3>
+      <ul>{group.values.map(skill => <li>{skill}</li>)}</ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 1.5rem; }
+  .skill-group { padding-top: .85rem; border-top: 1px solid var(--border); }
+  .skill-group h3 { margin: 0; font-size: 1rem; }
+  .skill-group ul { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+  .skill-group li { padding: .3rem .55rem; border: 1px solid var(--border); border-radius: .25rem; font-size: .9rem; }
+</style>

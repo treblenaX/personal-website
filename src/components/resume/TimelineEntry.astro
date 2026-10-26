@@ -1,0 +1,75 @@
+---
+import ProjectHighlight from './ProjectHighlight.astro';
+
+interface Props {
+  role: {
+    data: {
+      id: string;
+      title: string;
+      company: string;
+      location?: string;
+      start: string;
+      end: string | null;
+      summary: string;
+      milestone?: string;
+    };
+  };
+  projects: Array<{
+    data: {
+      title: string;
+      period: string;
+      problem: string;
+      contribution: string[];
+      outcome?: string;
+      technologies?: string[];
+    };
+  }>;
+}
+
+const { role, projects } = Astro.props as Props;
+const { data } = role;
+const { id, title, company, location, start, end, summary, milestone } = data;
+
+const formatMonth = (value: string) => {
+  if (!value) return '';
+  const [year, month] = value.split('-').map(Number);
+  return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(new Date(year, month - 1));
+};
+
+const isCurrent = !end;
+const dateRange = `${formatMonth(start)} – ${isCurrent ? 'Present' : formatMonth(end)}`;
+const milestoneText = milestone || (isCurrent ? 'Current' : '');
+---
+
+<article id={id} class="timeline-entry">
+  <span class="timeline-entry__marker" aria-hidden="true"></span>
+  <div class="timeline-entry__body">
+    <div class="timeline-entry__heading">
+      <div>
+        <h3>{title}</h3>
+        <p class="timeline-entry__company">{company}{location && `, ${location}`}</p>
+      </div>
+      <p class="timeline-entry__dates"><time datetime={start}>{formatMonth(start)}</time> – {end ? <time datetime={end}>{formatMonth(end)}</time> : 'Present'}</p>
+    </div>
+    {milestoneText && <p class="timeline-entry__milestone">{milestoneText}</p>}
+    <p class="timeline-entry__summary">{summary}</p>
+    {projects.length > 0 && (
+      <div class="timeline-entry__projects" aria-label="Selected engineering work">
+        {projects.map((project) => <ProjectHighlight project={project} />)}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .timeline-entry { position: relative; margin-left: -1px; padding: 0 0 3rem 2rem; border-left: 1px solid var(--career-rule); }
+  .timeline-entry:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .timeline-entry__marker { position: absolute; top: .35rem; left: -.42rem; width: .8rem; height: .8rem; border: 2px solid var(--primary); border-radius: 50%; background: var(--background); }
+  .timeline-entry__heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1.5rem; }
+  .timeline-entry h3 { margin: 0; font-size: 1.2rem; }
+  .timeline-entry__company, .timeline-entry__dates, .timeline-entry__summary { margin: .35rem 0 0; color: var(--muted-foreground); line-height: 1.6; }
+  .timeline-entry__dates { font-size: .95rem; }
+  .timeline-entry__milestone { display: inline-block; margin: .8rem 0 0; padding: .2rem .55rem; border: 1px solid var(--career-rule); border-radius: .25rem; font-size: .9rem; }
+  .timeline-entry__summary { max-width: 45rem; margin-top: .9rem; }
+  .timeline-entry__projects { margin-top: 1.25rem; }
+</style>

@@ -1,175 +1,236 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import NavBar from '../components/NavBar.astro';
+import { getCollection } from 'astro:content';
+
+const careerStories = (await getCollection('roles'))
+  .filter((role) => role.data.publish)
+  .sort((a, b) => b.data.start.localeCompare(a.data.start));
+const firstStory = careerStories[0];
+const storyCount = String(careerStories.length).padStart(2, '0');
+const storyLabels: Record<string, string> = { intern: 'Internship', sde1: 'SDE', sde2: 'SDE II', 'uw-ta': 'Teaching Assistant', microgroove: 'Consulting', symphoni: 'Internship' };
+const education = await getCollection('education');
+const formatMonth = (value: string) => {
+  const [year, month] = value.split('-').map(Number);
+  return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(new Date(year, month - 1));
+};
 ---
 
-<Layout>
-	<NavBar />
-	<div class="max-w-6xl mx-auto px-4 py-12">
-		<section id="home" class="min-h-screen flex flex-col justify-center">
-			<div class="text-center mb-16">
-				<h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">Welcome to My Professional Portfolio</h1>
-				<p class="text-xl text-muted-foreground max-w-2xl mx-auto">Software Development Engineer with expertise in agentic AI, web development, and teaching</p>
-				<div class="mt-8">
-					<a href="#about" class="inline-block bg-primary text-primary-foreground font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">Learn More About My Experience</a>
-				</div>
-			</div>
-		</section>
-		
-		<section id="about" class="min-h-screen flex flex-col justify-center py-12">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-foreground mb-4">About Me</h2>
-				<div class="w-24 h-1 bg-primary mx-auto rounded"></div>
-			</div>
-			
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Professional Summary</h3>
-					<p class="text-muted-foreground mb-4">Software Development Engineer with 3+ years at Amazon, specializing in agentic AI development and software design. Passionate about creating customer-focused solutions and mentoring the next generation of developers.</p>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Experience Highlights</h3>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• Amazon: Software Development Engineer II (2026-present)</li>
-						<li>• Amazon: Software Development Engineer (2023-2026)</li>
-						<li>• University of Washington: Teaching Assistant (2021-2023)</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		
-		<section id="experience" class="min-h-screen flex flex-col justify-center py-12">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-foreground mb-4">Professional Experience</h2>
-				<div class="w-24 h-1 bg-primary mx-auto rounded"></div>
-			</div>
-			
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Amazon - Software Development Engineer</h3>
-					<p class="text-primary mb-3">2023 - Present</p>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• Created, maintained, and expanded features on the Amazon website and mobile app experiences which improved customer experiences</li>
-						<li>• Working on the Retail side to help you get your Everyday Essentials—quick!</li>
-						<li>• Specializing in Agentic AI Development, Software Design</li>
-					</ul>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">University of Washington</h3>
-					<p class="text-primary mb-3">2021 - 2023</p>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• Undergraduate Teaching Assistant (INFO 200 & INFO 498)</li>
-						<li>• Collaborated with Professor and TA team to develop introductory Informatics course</li>
-						<li>• Teaches weekly sections and mentors 100+ students</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		
-		<section id="skills" class="min-h-screen flex flex-col justify-center py-12">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-foreground mb-4">Technical Skills</h2>
-				<div class="w-24 h-1 bg-primary mx-auto rounded"></div>
-			</div>
-			
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Programming</h3>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• TypeScript, JavaScript</li>
-						<li>• React.js, Node.js, Angular</li>
-						<li>• MongoDB</li>
-					</ul>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Cloud & Tools</h3>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• AWS, AWS Glue</li>
-						<li>• Heroku</li>
-						<li>• Data flow analysis</li>
-					</ul>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Development</h3>
-					<ul class="text-muted-foreground space-y-2">
-						<li>• Full-stack development</li>
-						<li>• Software design</li>
-						<li>• Bug resolution</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		
-		<section id="projects" class="min-h-screen flex flex-col justify-center py-12">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-foreground mb-4">Notable Projects</h2>
-				<div class="w-24 h-1 bg-primary mx-auto rounded"></div>
-			</div>
-			
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Amazon Website Enhancements</h3>
-					<p class="text-muted-foreground">Improved customer experience through feature development</p>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Justice Call Adaptation</h3>
-					<p class="text-muted-foreground">Adapted Microsoft's card game into online website</p>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Web Solutions Development</h3>
-					<p class="text-muted-foreground">Identified and resolved flaws in legacy websites</p>
-				</div>
-				
-				<div class="bg-card rounded-xl shadow-lg p-6 border border-border">
-					<h3 class="text-xl font-bold text-foreground mb-3">Small Business Platform</h3>
-					<p class="text-muted-foreground">Collaborated on Angular platform with Node.js and MongoDB</p>
-				</div>
-			</div>
-		</section>
-	</div>
+<Layout title="Elbert Cheng | Engineering" description="A personal collection of career experience and selected engineering work.">
+  <nav class="home-nav" aria-label="Page navigation">
+    <a class="home-nav__name" href="#top">Elbert Cheng</a>
+    <div class="home-nav__links">
+      <a href="#story">Career timeline</a>
+      <a href="#role-sde2">Current role</a>
+    </div>
+  </nav>
+
+  <header id="top" class="home-opening">
+    <section id="home" class="home-opening__content" aria-labelledby="home-title">
+      <p class="home-opening__label">Engineering, in progress</p>
+      <h1 id="home-title">Good work moves through people.</h1>
+      <p class="home-opening__copy">A story about finding the real problem, shaping a useful system, and making the result dependable.</p>
+      <a class="home-opening__link" href="#story">Scroll to begin <span aria-hidden="true">↓</span></a>
+    </section>
+    <div class="home-opening__index" aria-hidden="true"><span>01</span><span class="home-opening__rule"></span><span>03</span></div>
+  </header>
+
+  <section id="story" class="story" aria-label="Career timeline">
+    <aside class="story-panel" aria-label="Career timeline">
+      <div class="story-panel__inner">
+        <p class="story-panel__eyebrow">Career timeline</p>
+        <p class="story-panel__counter"><span data-story-count>01</span><span> / {storyCount}</span></p>
+        <h2 data-story-title>{firstStory?.data.title}</h2>
+        <p class="story-panel__summary" data-story-summary>{firstStory?.data.storySummary}</p>
+        <ol class="story-track" aria-label="Experience by role">
+            {careerStories.map((role, index) => (
+              <li class:list={{ 'is-active': index === 0 }} data-story-marker aria-current={index === 0 ? 'step' : undefined}>
+                <a href={`#role-${role.data.id}`}>
+                  <span class="story-track__dot" aria-hidden="true"></span>
+                  <span class="story-track__date">{formatMonth(role.data.start)} – {role.data.end ? formatMonth(role.data.end) : 'Present'}</span>
+                  <span class="story-track__role">{role.data.title}</span>
+                  <span class="story-track__employer">{role.data.company}</span>
+                  {role.data.milestone && <span class="story-track__milestone">{role.data.milestone}</span>}
+                </a>
+              </li>
+            ))}
+        </ol>
+      </div>
+      <span class="story-panel__signature" aria-hidden="true">EC / ENGINEERING</span>
+    </aside>
+
+    <div class="story-chapters">
+      {careerStories.map((role, index) => (
+        <article
+          id={`role-${role.data.id}`}
+          class:list={{ 'story-chapter': true, 'is-active': index === 0 }}
+          data-story-step={index}
+          data-title={role.data.title}
+          data-summary={role.data.storySummary}
+        >
+          <p class="story-chapter__number">{String(index + 1).padStart(2, '0')} / {storyLabels[role.data.id]}</p>
+          <h2>{role.data.title}</h2>
+          <p class="story-chapter__role">
+            <span class="story-chapter__employer">{role.data.company}</span>
+            <span aria-hidden="true">·</span>
+            {formatMonth(role.data.start)} – {role.data.end ? formatMonth(role.data.end) : 'Present'}
+            {role.data.location && <span class="story-chapter__loc">· {role.data.location}</span>}
+          </p>
+          <p class="story-chapter__summary">{role.data.summary}</p>
+          <ul class="story-chapter__points">
+            {role.data.careerPoints.slice(0, 4).map((point) => <li>{point}</li>)}
+          </ul>
+          {role.data.careerPoints.length > 4 && (
+            <details class="story-chapter__more">
+              <summary>More on this role ({role.data.careerPoints.length - 4})</summary>
+              <ul class="story-chapter__points story-chapter__points--more">
+                {role.data.careerPoints.slice(4).map((point) => <li>{point}</li>)}
+              </ul>
+            </details>
+          )}
+          <ul class="story-chapter__badges" aria-label="Skills and role highlights">
+            {role.data.milestone && <li class="story-chapter__badge story-chapter__badge--milestone">{role.data.milestone}</li>}
+            {role.data.skills.map((skill) => <li class="story-chapter__badge">{skill}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {education.length > 0 && (
+  <section id="education" class="education" aria-labelledby="education-title">
+    <p class="education__eyebrow">Education</p>
+    {education.map((entry) => (
+      <article class="education__entry">
+        <div>
+          <h3 id="education-title">{entry.data.school}</h3>
+          <p class="education__degree">{entry.data.degree}</p>
+          <ul class="education__details">
+            {entry.data.details.map((detail) => <li>{detail}</li>)}
+          </ul>
+        </div>
+        <p class="education__dates">
+          <time datetime={entry.data.start}>{formatMonth(entry.data.start)}</time> – <time datetime={entry.data.end}>{formatMonth(entry.data.end)}</time>
+        </p>
+      </article>
+    ))}
+  </section>
+  )}
+
+  <footer class="home-footer">
+    <a href="#top">Back to the beginning ↑</a>
+  </footer>
 </Layout>
 
 <style>
-	html {
-		scroll-behavior: smooth;
-	}
-	
-	/* Navbar styling for seamless blend at top */
-	#navbar {
-		background-color: #0a0a0a; /* Match content background */
-		border-bottom: none;
-		transition: all 0.3s ease;
-	}
-	
-	/* Navbar gets border when scrolled */
-	#navbar.scrolled {
-		border-bottom: 1px solid rgba(100, 120, 255, 0.3);
-		background-color: rgba(10, 10, 10, 0.95); /* Slightly transparent for effect */
-	}
-	
-	/* Ensure content background matches navbar background */
-	body {
-		background-color: #0a0a0a;
-	}
+  .home-nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem max(1.25rem, calc((100vw - 76rem) / 2)); border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent); background: color-mix(in srgb, var(--background) 94%, transparent); backdrop-filter: blur(12px); }
+  .home-nav a, .home-footer a { color: var(--foreground); text-decoration: none; }
+  .home-nav a:focus-visible, .home-footer a:focus-visible, .home-opening__link:focus-visible { outline: 2px solid var(--outline); outline-offset: 4px; }
+  .home-nav__name { font-weight: 650; }
+  .home-nav__links { display: flex; gap: clamp(.8rem, 3vw, 2rem); color: var(--muted-foreground); font-size: .95rem; }
+  .home-opening { min-height: 82svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(7rem, 20rem); align-items: center; gap: 2rem; max-width: 76rem; margin: 0 auto; padding: 4rem 2rem 6rem; }
+  .home-opening__content { max-width: 47rem; }
+  .home-opening__label { margin: 0 0 1.25rem; color: var(--primary); font-weight: 650; }
+  .home-opening h1 { max-width: 16ch; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 5.5rem; font-weight: 500; line-height: .98; }
+  .home-opening__copy { max-width: 34rem; margin: 1.5rem 0 0; color: var(--muted-foreground); font-size: 1.25rem; line-height: 1.6; }
+  .home-opening__link { display: inline-flex; gap: .75rem; align-items: center; margin-top: 2rem; color: var(--foreground); font-weight: 600; text-decoration-color: var(--primary); text-underline-offset: .3rem; }
+  .home-opening__index { display: flex; align-items: center; gap: 1rem; color: var(--muted-foreground); font-size: .95rem; }
+  .home-opening__rule { height: 1px; flex: 1; background: var(--border); }
+  .story { display: grid; grid-template-columns: minmax(19rem, .9fr) minmax(0, 1.1fr); align-items: stretch; background: #174783; color: #f5f9ff; }
+  .story-panel { position: sticky; top: 3.6rem; align-self: start; display: flex; height: calc(100svh - 3.6rem); min-height: min(34rem, calc(100svh - 3.6rem)); align-items: center; padding: 3rem clamp(2rem, 6vw, 6rem); background: #174783; }
+  .story-panel__inner { width: 100%; max-width: 27rem; margin: 0 auto; }
+  .story-panel__eyebrow, .story-panel__counter, .story-panel__signature { font-size: .9rem; }
+  .story-panel__eyebrow { margin: 0 0 3rem; color: #d9eaff; }
+  .story-panel__counter { margin: 0 0 1rem; color: #a9ddff; }
+  .story-panel__counter span:first-child { font-size: 1.25rem; font-weight: 650; }
+  .story-panel h2 { max-width: 18ch; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 2.4rem; font-weight: 500; line-height: 1.08; }
+  .story-panel__summary { max-width: 23rem; min-height: 4.5rem; margin: 1.2rem 0 2.5rem; color: #d9eaff; font-size: 1.1rem; line-height: 1.6; }
+  .story-track { position: relative; display: grid; gap: .35rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+  .story-track::before { position: absolute; top: .7rem; bottom: .7rem; left: .42rem; width: 1px; background: #6688b3; content: ''; }
+  .story-track li { position: relative; padding-left: 1.8rem; color: #c0d8f6; transition: color .2s ease; }
+  .story-track li a { display: grid; gap: .16rem; padding: .6rem .65rem .65rem 0; color: inherit; text-decoration: none; }
+  .story-track li a:focus-visible { outline: 2px solid #a9ddff; outline-offset: 3px; }
+  .story-track__dot { position: absolute; top: 1rem; left: .15rem; z-index: 1; width: .55rem; height: .55rem; border: 1px solid #a9c5e8; border-radius: 50%; background: #174783; }
+  .story-track li.is-active { color: #fff; }
+  .story-track li.is-active .story-track__dot { border-color: #a9ddff; background: #a9ddff; box-shadow: 0 0 0 4px #174783; }
+  .story-track__date, .story-track__employer { color: #c0d8f6; font-size: .78rem; }
+  .story-track__role { font-size: .98rem; font-weight: 650; line-height: 1.3; }
+  .story-track__milestone { justify-self: start; margin-top: .2rem; padding: .15rem .45rem; border: 1px solid #a9ddff; border-radius: 999px; color: #e8f6ff; font-size: .7rem; }
+  .story-panel__signature { position: absolute; right: 1.5rem; bottom: 1.5rem; color: #c0d8f6; }
+  .story-chapters { padding: 0 clamp(2rem, 7vw, 7rem); }
+  .story-chapter { display: flex; min-height: 100svh; flex-direction: column; justify-content: center; max-width: 35rem; margin: 0 auto; padding: 7rem 0; opacity: .46; transition: opacity .35s ease; }
+  .story-chapter.is-active { opacity: 1; }
+  .story-chapter__number { margin: 0 0 1.5rem; color: #a9ddff; font-size: .9rem; }
+  .story-chapter h2 { margin: 0 0 .6rem; font-family: Georgia, 'Times New Roman', serif; font-size: 2.6rem; font-weight: 500; line-height: 1.08; }
+  .story-chapter__role { margin: 0; color: #a9ddff; font-size: 1.02rem; letter-spacing: .01em; }
+  .story-chapter__employer { font-weight: 650; }
+  .story-chapter__summary { max-width: 31rem; margin: .9rem 0 0; color: #e1edfc; font-size: 1.08rem; line-height: 1.7; }
+  .story-chapter__badges { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
+  .story-chapter__badge { padding: .3rem .6rem; border: 1px solid #82a9d8; border-radius: 999px; color: #f5f9ff; font-size: .82rem; line-height: 1.2; }
+  .story-chapter__badge--milestone { border-color: #a9ddff; background: #a9ddff; color: #12355f; font-weight: 650; }
+  .story-chapter__points { display: grid; gap: .7rem; max-width: 33rem; margin: 1.25rem 0 0; padding: 0; list-style: none; color: #f5f9ff; line-height: 1.65; font-size: .98rem; }
+  .story-chapter__points li { position: relative; padding-left: 1.15rem; }
+  .story-chapter__points li::before { position: absolute; top: .62em; left: 0; width: .4rem; height: .4rem; border-radius: 50%; background: #a9ddff; content: ''; }
+  .story-chapter__more { max-width: 33rem; margin: .25rem 0 0; }
+  .story-chapter__more summary { padding: .45rem 0; color: #a9ddff; font-size: .92rem; cursor: pointer; }
+  .story-chapter__more summary:hover { text-decoration: underline; text-underline-offset: .25rem; }
+  .story-chapter__more summary:focus-visible { outline: 2px solid #a9ddff; outline-offset: 3px; }
+  .story-chapter__points--more { margin-top: .25rem; color: #d9eaff; }
+  .education { max-width: 35rem; margin: 0 auto; padding: 4rem 0 2rem; }
+  .education__eyebrow { margin: 0 0 1.5rem; color: #a9ddff; font-size: .9rem; }
+  .education__entry { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1.5rem; }
+  .education__entry h3 { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.7rem; font-weight: 500; line-height: 1.15; }
+  .education__degree { margin: .4rem 0 0; color: #e1edfc; font-size: 1.05rem; line-height: 1.6; }
+  .education__details { display: grid; gap: .4rem; margin: .8rem 0 0; padding-left: 1.25rem; color: #d9eaff; line-height: 1.65; font-size: .98rem; }
+  .education__dates { margin: .4rem 0 0; color: #c0d8f6; font-size: .95rem; }
+  .home-footer { max-width: 56rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; text-align: right; }
+  @media (max-width: 800px) {
+    .home-opening { min-height: 75svh; grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .home-opening h1 { max-width: 12ch; font-size: 4rem; }
+    .home-opening__index { max-width: 18rem; }
+    .story { min-width: 0; width: 100%; grid-template-columns: minmax(0, 1fr); }
+    .story-panel { position: relative; top: auto; width: 100%; min-width: 0; box-sizing: border-box; height: auto; min-height: auto; padding: 3rem 1.5rem; }
+    .story-panel__eyebrow { margin-bottom: 1.5rem; }
+    .story-panel h2 { max-width: 18ch; font-size: 2rem; }
+    .story-panel__summary { min-height: auto; margin-bottom: 1.5rem; }
+    .story-panel__signature { display: none; }
+    .story-track { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
+    .story-track li { align-items: flex-start; flex-direction: column; gap: .45rem; font-size: .8rem; }
+    .story-chapters { min-width: 0; padding: 0 1.5rem; }
+    .story-chapter { min-height: 70svh; padding: 4rem 0; opacity: 1; }
+    .story-chapter h2 { font-size: 2.2rem; }
+  }
+  @media (max-width: 480px) { .home-nav { align-items: flex-start; flex-direction: column; } .home-nav__links { width: 100%; justify-content: space-between; } .home-opening h1 { font-size: 3.25rem; } }
+  @media (max-width: 360px) { .home-opening { padding-inline: 1rem; } .home-opening h1 { max-width: 10ch; font-size: 2.6rem; } .home-opening__copy { font-size: 1.05rem; } }
+  @media (prefers-reduced-motion: reduce) { .story-track li, .story-chapter { transition: none; } }
 </style>
 
 <script>
-	// Add scroll effect to navbar
-	document.addEventListener('DOMContentLoaded', function() {
-		const navbar = document.getElementById('navbar');
-		
-		window.addEventListener('scroll', function() {
-			if (window.scrollY > 50) {
-				navbar.classList.add('scrolled');
-			} else {
-				navbar.classList.remove('scrolled');
-			}
-		});
-	});
+  const chapters = [...document.querySelectorAll<HTMLElement>('[data-story-step]')];
+  const markers = [...document.querySelectorAll<HTMLElement>('[data-story-marker]')];
+  const counter = document.querySelector<HTMLElement>('[data-story-count]');
+  const title = document.querySelector<HTMLElement>('[data-story-title]');
+  const summary = document.querySelector<HTMLElement>('[data-story-summary]');
+
+  if (chapters.length && counter && title && summary) {
+    const observer = new IntersectionObserver((entries) => {
+      const current = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!current) return;
+
+      const index = Number((current.target as HTMLElement).dataset.storyStep);
+      const chapter = chapters[index];
+      counter.textContent = String(index + 1).padStart(2, '0');
+      title.textContent = chapter.dataset.title ?? '';
+      summary.textContent = chapter.dataset.summary ?? '';
+      chapters.forEach((item, itemIndex) => item.classList.toggle('is-active', itemIndex === index));
+      markers.forEach((marker, markerIndex) => {
+        marker.classList.toggle('is-active', markerIndex === index);
+        if (markerIndex === index) marker.setAttribute('aria-current', 'step');
+        else marker.removeAttribute('aria-current');
+      });
+    }, { threshold: [0.2, 0.45, 0.7], rootMargin: '-15% 0px -15% 0px' });
+
+    chapters.forEach((chapter) => observer.observe(chapter));
+  }
 </script>

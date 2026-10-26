@@ -1,6 +1,7 @@
 ---
 import "@/styles/starwind.css";
 import "@/styles/cream-theme.css";
+const { title = 'Elbert - Personal Website', description = 'Personal website built with Astro' } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,8 +12,8 @@ import "@/styles/cream-theme.css";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Elbert - Personal Website</title>
-		<meta name="description" content="Personal website built with Astro" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<meta name="keywords" content="astro, website, personal" />
 		<meta name="author" content="Elbert" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
